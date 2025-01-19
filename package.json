@@ -6,13 +6,16 @@
         "start": "bun src/index.ts",
         "dev": "bun --watch src/index.ts",
         "lint": "eslint src",
-        "lint:fix": "eslint src --fix"
+        "lint:fix": "eslint src --fix",
+        "prettier": "prettier --check src",
+        "prettier:fix": "prettier --write src"
     },
     "devDependencies": {
         "@eslint/js": "^9.18.0",
         "@types/bun": "latest",
         "eslint": "^9.18.0",
         "globals": "^15.14.0",
+        "prettier": "3.4.2",
         "typescript-eslint": "^8.20.0"
     },
     "peerDependencies": {
