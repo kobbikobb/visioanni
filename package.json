@@ -3,16 +3,24 @@
     "module": "index.ts",
     "type": "module",
     "scripts": {
-        "start": "bun index.ts",
-        "dev": "bun --watch index.ts"
+        "start": "bun src/index.ts",
+        "dev": "bun --watch src/index.ts",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix"
     },
     "devDependencies": {
-        "@types/bun": "latest"
+        "@eslint/js": "^9.18.0",
+        "@types/bun": "latest",
+        "eslint": "^9.18.0",
+        "globals": "^15.14.0",
+        "typescript-eslint": "^8.20.0"
     },
     "peerDependencies": {
         "typescript": "^5.0.0"
     },
     "dependencies": {
-        "hono": "^4.6.17"
+        "eslint-plugin-react": "^7.37.4",
+        "hono": "^4.6.17",
+        "react": "^19.0.0"
     }
 }
