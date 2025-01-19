@@ -1,15 +1,16 @@
 # visioanni
 
-To install dependencies:
+Create a Vision for your Annual Goals!
+
+# To install dependencies:
 
 ```bash
 bun install
 ```
 
-To run:
+# To run:
 
 ```bash
-bun run index.ts
+bun start 
 ```
 
-This project was created using `bun init` in bun v1.1.45. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
