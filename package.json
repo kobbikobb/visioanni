@@ -4,6 +4,7 @@
     "type": "module",
     "scripts": {
         "start": "bun src/index.ts",
+        "check": "tsc --noEmit",
         "dev": "bun --watch src/index.ts",
         "lint": "eslint src",
         "lint:fix": "eslint src --fix",
