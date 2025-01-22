@@ -15,4 +15,4 @@ jobs:
       - run: bun check
       - run: bun prettier
       - run: bun lint
-
+      - run: bun test
