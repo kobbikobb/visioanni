@@ -1,15 +1,15 @@
 {
     "name": "visioanni",
-    "module": "index.ts",
+    "module": "server/src/index.ts",
     "type": "module",
     "scripts": {
-        "start": "bun src/index.ts",
+        "start": "bun server/src/index.ts",
         "check": "tsc --noEmit",
-        "dev": "bun --watch src/index.ts",
-        "lint": "eslint src",
-        "lint:fix": "eslint src --fix",
-        "prettier": "prettier --check src",
-        "prettier:fix": "prettier --write src"
+        "dev": "bun --watch server/src/index.ts",
+        "lint": "eslint server/src",
+        "lint:fix": "eslint server/src --fix",
+        "prettier": "prettier --check server/src",
+        "prettier:fix": "prettier --write server/src"
     },
     "devDependencies": {
         "@eslint/js": "^9.18.0",
