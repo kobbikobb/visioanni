@@ -2,14 +2,20 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
 
-type Goal = {
-    id: number;
-    title: string;
-    date: string;
-    completed: boolean;
-};
+const goalSchema = z.object({
+    id: z.number().int().min(1),
+    title: z.string().min(1),
+    date: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in the format yyyy-MM-dd'),
+    completed: z.boolean()
+});
 
-const mockGoals = [
+type Goal = z.infer<typeof goalSchema>;
+
+const goalPostSchema = goalSchema.omit({ id: true });
+
+const mockGoals: Goal[] = [
     {
         id: 1,
         title: 'Goal 1',
@@ -33,14 +39,6 @@ const mockGoals = [
 const getMockGoals = (): Goal[] => {
     return mockGoals;
 };
-
-const goalPostSchema = z.object({
-    title: z.string().min(1),
-    date: z
-        .string()
-        .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in the format yyyy-MM-dd'),
-    completed: z.boolean()
-});
 
 export const goalsRoute = new Hono()
     .get('/', (c) => {
