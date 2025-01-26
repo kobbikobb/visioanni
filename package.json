@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "start": "bun server/src/index.ts",
-        "check": "tsc --noEmit",
+        "build": "tsc --noEmit",
         "dev": "bun --watch server/src/index.ts",
         "lint": "eslint server/src",
         "lint:fix": "eslint server/src --fix",

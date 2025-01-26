@@ -11,8 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun check
-      - run: bun prettier
-      - run: bun lint
-      - run: bun test
+
+      - name: Build and Test Server
+        run: |
+          bun install
+          bun run build
+          bun run prettier
+          bun run lint
+          bun test
+
+      # Frontend tasks
+      - name: Build Test Frontend
+        working-directory: frontend
+        run: |
+          bun install
+          bun run lint
+          bun run build
