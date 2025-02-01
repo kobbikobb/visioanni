@@ -26,4 +26,5 @@ jobs:
         run: |
           bun install
           bun run lint
+          bun run prettier
           bun run build

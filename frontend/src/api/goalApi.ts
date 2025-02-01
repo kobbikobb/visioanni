@@ -1,13 +1,16 @@
 type createGoalParams = {
-    title: string,
-    date: string
+    title: string;
+    date: string;
 };
 
-export const createGoal = async ({ title, date }: createGoalParams): Promise<void> => {
+export const createGoal = async ({
+    title,
+    date
+}: createGoalParams): Promise<void> => {
     const response = await fetch('/api/goals', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({ title, date, completed: false })
     });
@@ -27,5 +30,4 @@ export const getGoals = async () => {
     const data = await response.json();
 
     return data.goals;
-}
-
+};

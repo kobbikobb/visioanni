@@ -18,7 +18,9 @@ const useGetGoals = () => {
                 const goalsResult = await getGoals();
                 setGoals(goalsResult);
             } catch (error: unknown) {
-                setError(error instanceof Error ? error.message : 'Unknown error.');
+                setError(
+                    error instanceof Error ? error.message : 'Unknown error.'
+                );
             } finally {
                 setLoading(false);
             }

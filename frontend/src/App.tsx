@@ -1,14 +1,14 @@
-import './App.css'
-import GoalForm from './components/GoalForm'
-import GoalList from './components/GoalList'
+import './App.css';
+import GoalForm from './components/GoalForm';
+import GoalList from './components/GoalList';
 
 function App() {
-  return (
-    <>
-      <GoalForm />
-      <GoalList />
-    </>
-  )
+    return (
+        <>
+            <GoalForm />
+            <GoalList />
+        </>
+    );
 }
 
-export default App
+export default App;

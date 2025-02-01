@@ -2,11 +2,20 @@ import React from 'react';
 import useCreateGoal from './useCreateGoal';
 
 const GoalForm: React.FC = () => {
-    const { title, date, status, handleTitleChange, handleDateChange, handleCreateGoal } = useCreateGoal();
+    const {
+        title,
+        date,
+        status,
+        handleTitleChange,
+        handleDateChange,
+        handleCreateGoal
+    } = useCreateGoal();
 
     return (
         <div className="max-w-md mx-auto mt-12 p-6 border border-gray-300 rounded-xl shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">Create New Goal</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">
+                Create New Goal
+            </h2>
             <input
                 type="text"
                 placeholder="Title"
@@ -26,10 +35,11 @@ const GoalForm: React.FC = () => {
             >
                 Create Goal
             </button>
-            {status && <p className="mt-4 text-center text-gray-600">{status}</p>}
+            {status && (
+                <p className="mt-4 text-center text-gray-600">{status}</p>
+            )}
         </div>
     );
 };
 
 export default GoalForm;
-
