@@ -6,9 +6,12 @@ const useCreateGoal = () => {
     const [date, setDate] = useState<string>('');
     const [status, setStatus] = useState<string>('');
 
-    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
+        setTitle(e.target.value);
     const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const formattedDate = new Date(e.target.value).toISOString().split('T')[0];
+        const formattedDate = new Date(e.target.value)
+            .toISOString()
+            .split('T')[0];
         setDate(formattedDate);
     };
 
@@ -24,7 +27,11 @@ const useCreateGoal = () => {
             setTitle('');
             setDate('');
         } catch (error: unknown) {
-            setStatus(error instanceof Error ? `Network error: ${error.message}` : 'Unknown error.');
+            setStatus(
+                error instanceof Error
+                    ? `Network error: ${error.message}`
+                    : 'Unknown error.'
+            );
         }
     };
 
@@ -39,4 +46,3 @@ const useCreateGoal = () => {
 };
 
 export default useCreateGoal;
-
