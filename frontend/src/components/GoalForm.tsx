@@ -1,5 +1,6 @@
 import React from 'react';
 import useCreateGoal from './useCreateGoal';
+import { Button } from '@/components/ui/button';
 
 const GoalForm: React.FC = () => {
     const {
@@ -29,12 +30,12 @@ const GoalForm: React.FC = () => {
                 onChange={handleDateChange}
                 className="w-full p-3 mb-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
+            <Button
                 onClick={handleCreateGoal}
                 className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
             >
                 Create Goal
-            </button>
+            </Button>
             {status && (
                 <p className="mt-4 text-center text-gray-600">{status}</p>
             )}
