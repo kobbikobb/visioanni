@@ -22,17 +22,17 @@ const GoalForm: React.FC = () => {
                 placeholder="Title"
                 value={title}
                 onChange={handleTitleChange}
-                className="w-full p-3 mb-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 mb-3 rounded-md border"
             />
             <input
                 type="date"
                 value={date}
                 onChange={handleDateChange}
-                className="w-full p-3 mb-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 mb-3 rounded-md border"
             />
             <Button
                 onClick={handleCreateGoal}
-                className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="w-full p-3 mb-3"
             >
                 Create Goal
             </Button>
