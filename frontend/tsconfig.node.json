@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-
         /* Shadcn */
         "baseUrl": ".",
         "paths": {
