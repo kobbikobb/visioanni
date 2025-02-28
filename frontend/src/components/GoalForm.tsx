@@ -32,7 +32,7 @@ const GoalForm: React.FC = () => {
             />
             <Button
                 onClick={handleCreateGoal}
-                className="w-full p-3 mb-3"
+                className="w-full p-3 mb-3 bg-primary"
             >
                 Create Goal
             </Button>
