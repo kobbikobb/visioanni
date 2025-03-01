@@ -15,7 +15,7 @@ const GoalForm: React.FC = () => {
     return (
         <div className="max-w-md mx-auto mt-12 p-6 border border-gray-300 rounded-xl shadow-md">
             <h2 className="text-2xl font-bold mb-4 text-center">
-                Create Brand New Goal
+                Create New Goal
             </h2>
             <input
                 type="text"
