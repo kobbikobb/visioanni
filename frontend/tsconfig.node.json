@@ -3,7 +3,8 @@
         /* Shadcn */
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@server/*": ["../server/src/*"]
         },
 
         /* Output */
