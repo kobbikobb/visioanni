@@ -1,3 +1,5 @@
+import { api } from './api.ts';
+
 type createGoalParams = {
     title: string;
     date: string;
@@ -7,27 +9,24 @@ export const createGoal = async ({
     title,
     date
 }: createGoalParams): Promise<void> => {
-    const response = await fetch('/api/goals', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ title, date, completed: false })
+    const response = await api.goals.$post({
+        json: {
+            title,
+            date,
+            completed: false
+        }
     });
 
     if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create goal.');
+        throw new Error('Failed to create goal.');
     }
 };
 
 export const getGoals = async () => {
-    const response = await fetch('/api/goals');
+    const response = await api.goals.$get();
     if (!response.ok) {
         throw new Error('Failed to fetch goals.');
     }
-
     const data = await response.json();
-
     return data.goals;
 };
