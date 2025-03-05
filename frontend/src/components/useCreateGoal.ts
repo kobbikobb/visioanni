@@ -1,7 +1,4 @@
-import {
-  useMutation,
-  useQueryClient
-} from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, ChangeEvent } from 'react';
 import { createGoal } from '../api/goalApi';
 
@@ -43,7 +40,7 @@ const useCreateGoal = () => {
             setStatus('Title and Date are required.');
             return;
         }
-        createGoalMutation.mutate ({ title, date });
+        createGoalMutation.mutate({ title, date });
     };
 
     return {
