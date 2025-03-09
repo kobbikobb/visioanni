@@ -1,16 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import GoalForm from '../components/GoalForm';
-import GoalList from '../components/GoalList';
+import GoalPage from '@/components/GoalsPage';
 
 export const Route = createFileRoute('/goals')({
     component: GoalsComponent
 });
 
 function GoalsComponent() {
-    return (
-        <>
-            <GoalForm />
-            <GoalList />
-        </>
-    );
+    return <GoalPage />;
 }

@@ -1,4 +1,4 @@
-import useGetGoals from './useGetGoals';
+import useGetGoals from '@/components/useGetGoals';
 
 const GoalsList: React.FC = () => {
     const { goals, loading, error } = useGetGoals();
@@ -12,10 +12,7 @@ const GoalsList: React.FC = () => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
-                Goals List
-            </h1>
+        <div>
             <div className="space-y-6">
                 {goals.map((goal, index) => (
                     <div
