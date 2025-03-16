@@ -22,8 +22,8 @@ const Nav = () => {
             <Link to="/about" className="[&.active]:font-bold">
                 About
             </Link>
-            <Link to="/logout" className="[&.active]:font-bold">
-                Logout
+            <Link to="/profile" className="[&.active]:font-bold">
+                Profile
             </Link>
         </div>
     );

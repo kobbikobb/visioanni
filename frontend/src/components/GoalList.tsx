@@ -1,7 +1,7 @@
-import useGetGoals from '@/components/useGetGoals';
+import useGoals from '@/hooks/useGoals';
 
 const GoalsList: React.FC = () => {
-    const { goals, loading, error } = useGetGoals();
+    const { goals, loading, error } = useGoals();
 
     if (loading) {
         return <div className="text-center py-4">Loading...</div>;

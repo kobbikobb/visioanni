@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root';
+import { Route as ProfileImport } from './routes/profile';
 import { Route as GoalsImport } from './routes/goals';
 import { Route as AboutImport } from './routes/about';
 import { Route as IndexImport } from './routes/index';
 
 // Create/Update Routes
+
+const ProfileRoute = ProfileImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => rootRoute
+} as any);
 
 const GoalsRoute = GoalsImport.update({
     id: '/goals',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof GoalsImport;
             parentRoute: typeof rootRoute;
         };
+        '/profile': {
+            id: '/profile';
+            path: '/profile';
+            fullPath: '/profile';
+            preLoaderRoute: typeof ProfileImport;
+            parentRoute: typeof rootRoute;
+        };
     }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
     '/': typeof IndexRoute;
     '/about': typeof AboutRoute;
     '/goals': typeof GoalsRoute;
+    '/profile': typeof ProfileRoute;
 }
 
 export interface FileRoutesByTo {
     '/': typeof IndexRoute;
     '/about': typeof AboutRoute;
     '/goals': typeof GoalsRoute;
+    '/profile': typeof ProfileRoute;
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
     '/': typeof IndexRoute;
     '/about': typeof AboutRoute;
     '/goals': typeof GoalsRoute;
+    '/profile': typeof ProfileRoute;
 }
 
 export interface FileRouteTypes {
     fileRoutesByFullPath: FileRoutesByFullPath;
-    fullPaths: '/' | '/about' | '/goals';
+    fullPaths: '/' | '/about' | '/goals' | '/profile';
     fileRoutesByTo: FileRoutesByTo;
-    to: '/' | '/about' | '/goals';
-    id: '__root__' | '/' | '/about' | '/goals';
+    to: '/' | '/about' | '/goals' | '/profile';
+    id: '__root__' | '/' | '/about' | '/goals' | '/profile';
     fileRoutesById: FileRoutesById;
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
     IndexRoute: typeof IndexRoute;
     AboutRoute: typeof AboutRoute;
     GoalsRoute: typeof GoalsRoute;
+    ProfileRoute: typeof ProfileRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
     IndexRoute: IndexRoute,
     AboutRoute: AboutRoute,
-    GoalsRoute: GoalsRoute
+    GoalsRoute: GoalsRoute,
+    ProfileRoute: ProfileRoute
 };
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/goals"
+        "/goals",
+        "/profile"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/goals": {
       "filePath": "goals.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.tsx"
     }
   }
 }

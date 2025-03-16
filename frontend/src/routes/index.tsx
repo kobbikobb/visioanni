@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
-    component: RouteComponent
+    component: Index
 });
 
-function RouteComponent() {
+function Index() {
     return <div>Welcome home "/"!</div>;
 }
