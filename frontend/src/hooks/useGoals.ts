@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGoals } from '@/api/goalApi';
 
-const useGoals = () => {
+export const useGoals = () => {
     const {
         data: goals = [],
         isPending: loading = true,
@@ -13,5 +13,3 @@ const useGoals = () => {
 
     return { goals, loading, error: error?.message };
 };
-
-export default useGoals;

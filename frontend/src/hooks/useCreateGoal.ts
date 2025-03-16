@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, ChangeEvent } from 'react';
 import { createGoal } from '@/api/goalApi';
 
-const useCreateGoal = () => {
+export const useCreateGoal = () => {
     const [title, setTitle] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [status, setStatus] = useState<string>('');
@@ -53,5 +53,3 @@ const useCreateGoal = () => {
         handleCreateGoal
     };
 };
-
-export default useCreateGoal;
