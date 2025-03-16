@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useCreateGoal from '@/components/useCreateGoal';
+import useCreateGoal from '@/hooks/useCreateGoal';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
