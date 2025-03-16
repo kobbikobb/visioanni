@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import useCurrentUser from '@/hooks/useCurrentUser';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
-export const Route = createFileRoute('/profile')({
+export const Route = createFileRoute('/_authenticated/profile')({
     component: Profile
 });
 

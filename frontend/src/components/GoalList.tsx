@@ -1,4 +1,4 @@
-import useGoals from '@/hooks/useGoals';
+import { useGoals } from '@/hooks/useGoals';
 
 const GoalsList: React.FC = () => {
     const { goals, loading, error } = useGoals();

@@ -1,12 +1,13 @@
 import { getCurrentUser } from '@/api/userApi';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, queryOptions } from '@tanstack/react-query';
 
-const useCurrentUser = () => {
-    const { data: user, isPending: isUserPending } = useQuery({
-        queryKey: ['get-current-user'],
-        queryFn: getCurrentUser
-    });
+export const userQueryOptions = queryOptions({
+    queryKey: ['get-current-user'],
+    queryFn: getCurrentUser,
+    staleTime: Infinity
+});
+
+export const useCurrentUser = () => {
+    const { data: user, isPending: isUserPending } = useQuery(userQueryOptions);
     return { user, isUserPending };
 };
-
-export default useCurrentUser;

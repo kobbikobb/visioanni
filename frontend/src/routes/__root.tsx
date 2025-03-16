@@ -1,5 +1,14 @@
 import React, { Suspense } from 'react';
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import {
+    createRootRouteWithContext,
+    Link,
+    Outlet
+} from '@tanstack/react-router';
+import { type QueryClient } from '@tanstack/react-query';
+
+interface RouterContext {
+    queryClient: QueryClient;
+}
 
 const TanStackRouterDevtools =
     process.env.NODE_ENV === 'production'
@@ -42,6 +51,6 @@ const Root = () => {
     );
 };
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
     component: Root
 });
