@@ -1,12 +1,10 @@
 import {
     createKindeServerClient,
     GrantType,
-    type SessionManager,
-    type UserType
+    type SessionManager
 } from '@kinde-oss/kinde-typescript-sdk';
 import { type Context } from 'hono';
 import { getCookie, setCookie, deleteCookie } from 'hono/cookie';
-import { createMiddleware } from 'hono/factory';
 
 const kindeConfig = {
     authDomain: process.env.KINDE_DOMAIN!,
@@ -15,8 +13,6 @@ const kindeConfig = {
     redirectURL: process.env.KINDE_REDIRECT_URI!,
     logoutRedirectURL: process.env.KINDE_LOGOUT_REDIRECT_URI!
 };
-
-console.log(kindeConfig);
 
 export const kindeClient = createKindeServerClient(
     GrantType.AUTHORIZATION_CODE,
@@ -48,26 +44,4 @@ export const sessionManager = (c: Context): SessionManager => ({
             deleteCookie(c, key);
         });
     }
-});
-
-type Env = {
-    Variables: {
-        user: UserType;
-    };
-};
-
-export const getUser = createMiddleware<Env>(async (c, next) => {
-    try {
-        const manager = sessionManager(c);
-        const authenticated = await kindeClient.isAuthenticated(manager);
-        if (!authenticated) {
-            return c.json({ message: 'not authenticated' }, 401);
-        }
-        const user = await kindeClient.getUserProfile(manager);
-        c.set('user', user);
-    } catch (e) {
-        console.error(e);
-        return c.json({ message: 'not authenticated' }, 401);
-    }
-    await next();
 });

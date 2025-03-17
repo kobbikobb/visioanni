@@ -16,5 +16,10 @@ function Profile() {
         return <div>Not logged in</div>;
     }
 
-    return <div>Your profile: {user.given_name}</div>;
+    return (
+        <div>
+            <p>Your profile: {user.given_name}</p>
+            <a href="/api/logout">Logout</a>
+        </div>
+    );
 }

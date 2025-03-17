@@ -1,5 +1,7 @@
-import { describe, it, expect } from 'bun:test';
+import { describe, it, expect, beforeEach, spyOn } from 'bun:test';
 import app from '../app';
+import * as kinde from '../kinde';
+import { type UserType } from '@kinde-oss/kinde-typescript-sdk';
 
 const aGoal = () => {
     return {
@@ -31,6 +33,17 @@ const deleteData = (path: string) => {
 };
 
 describe('Goals API', () => {
+    beforeEach(() => {
+        const user = {} as UserType;
+
+        spyOn(kinde.kindeClient, 'isAuthenticated').mockReturnValue(
+            Promise.resolve(true)
+        );
+        spyOn(kinde.kindeClient, 'getUserProfile').mockReturnValue(
+            Promise.resolve(user)
+        );
+    });
+
     it('should GET goals', async () => {
         const newGoal = aGoal();
         await postData('/api/goals', newGoal);
