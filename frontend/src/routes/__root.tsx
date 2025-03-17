@@ -28,11 +28,11 @@ const Nav = () => {
             <Link to="/goals" className="[&.active]:font-bold">
                 Goals
             </Link>
-            <Link to="/about" className="[&.active]:font-bold">
-                About
-            </Link>
             <Link to="/profile" className="[&.active]:font-bold">
                 Profile
+            </Link>
+            <Link to="/about" className="[&.active]:font-bold">
+                About
             </Link>
         </div>
     );

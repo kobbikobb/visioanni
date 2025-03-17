@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { zValidator } from '@hono/zod-validator';
+import { getUser } from '../authMiddleware';
 
 const goalSchema = z.object({
     id: z.number().int().min(1),
@@ -41,10 +42,10 @@ const getMockGoals = (): Goal[] => {
 };
 
 export const goalsRoute = new Hono()
-    .get('/', (c) => {
+    .get('/', getUser, (c) => {
         return c.json({ goals: getMockGoals() });
     })
-    .get('/:id{[0-9]+}', (c) => {
+    .get('/:id{[0-9]+}', getUser, (c) => {
         const id = Number.parseInt(c.req.param('id'));
         const goal = mockGoals.find((g) => g.id === id);
         if (!goal) {
@@ -52,13 +53,13 @@ export const goalsRoute = new Hono()
         }
         return c.json(goal);
     })
-    .post('/', zValidator('json', goalPostSchema), (c) => {
+    .post('/', getUser, zValidator('json', goalPostSchema), (c) => {
         const goalInput = c.req.valid('json');
         const goal: Goal = { id: mockGoals.length + 1, ...goalInput };
         mockGoals.push(goal);
         return c.json(goal, 201);
     })
-    .delete('/:id{[0-9]+}', async (c) => {
+    .delete('/:id{[0-9]+}', getUser, async (c) => {
         const id = Number.parseInt(c.req.param('id'));
         const index = mockGoals.findIndex((g) => g.id === id);
         if (index === -1) {
