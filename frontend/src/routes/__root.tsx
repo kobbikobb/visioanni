@@ -21,7 +21,7 @@ const TanStackRouterDevtools =
 
 const Nav = () => {
     return (
-        <div className="p-2 flex gap-2">
+        <div className="p-2 flex gap-2 max-w-2xl m-auto">
             <Link to="/" className="[&.active]:font-bold">
                 Home
             </Link>{' '}
@@ -43,7 +43,9 @@ const Root = () => {
         <>
             <Nav />
             <hr />
-            <Outlet />
+            <div className="mp-2 gap-2 max-w-4xl mx-auto p-4">
+                <Outlet />
+            </div>
             <Suspense>
                 <TanStackRouterDevtools />
             </Suspense>

@@ -6,6 +6,7 @@
         "start": "bun server/src/index.ts",
         "build": "tsc --noEmit",
         "dev": "bun --watch server/src/index.ts",
+        "migrate": "bun migrate.ts",
         "lint": "eslint server/src",
         "lint:fix": "eslint server/src --fix",
         "prettier": "prettier --check server/src",
@@ -15,6 +16,8 @@
         "@eslint/js": "^9.18.0",
         "@flydotio/dockerfile": "^0.7.8",
         "@types/bun": "latest",
+        "@types/pg": "^8.11.11",
+        "drizzle-kit": "^0.30.6",
         "eslint": "^9.18.0",
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-prettier": "^5.2.3",
@@ -27,10 +30,14 @@
         "typescript": "^5.0.0"
     },
     "dependencies": {
+        "@electric-sql/pglite": "^0.2.17",
         "@hono/zod-validator": "^0.4.2",
         "@kinde-oss/kinde-typescript-sdk": "^2.9.1",
+        "drizzle-orm": "^0.41.0",
         "eslint-plugin-react": "^7.37.4",
         "hono": "^4.6.17",
+        "pglite": "electric-sql/pglite",
+        "postgres": "^3.4.5",
         "react": "^19.0.0"
     }
 }

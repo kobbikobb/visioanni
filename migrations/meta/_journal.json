@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1743353077071,
+      "tag": "0000_gorgeous_thena",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1743374791568,
+      "tag": "0001_concerned_karen_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743411116618,
+      "tag": "0002_bent_demogoblin",
+      "breakpoints": true
+    }
+  ]
+}

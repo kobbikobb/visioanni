@@ -2,15 +2,7 @@
 
 Create a Vision for your Annual Goals!
 
-# To install dependencies:
-
-```bash
-bun install
-```
-
-# To run:
-
-```bash
-bun start 
-```
-
+## TODO
+- Move server files to /server f.x. package.json
+- Clean up db for interfaces
+- Error handling in the frontend
