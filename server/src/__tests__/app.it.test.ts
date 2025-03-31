@@ -26,20 +26,24 @@ const postData = (path: string, obj: object) => {
 };
 
 const deleteData = (path: string) => {
-    console.log('path', path);
     return app.request(path, {
         method: 'DELETE'
     });
 };
 
 describe('Goals API', () => {
+    const userId = 'user-id-1';
+
     beforeEach(() => {
-        const user = {} as UserType;
+        const user = { id: userId } as UserType;
 
         spyOn(kinde.kindeClient, 'isAuthenticated').mockReturnValue(
             Promise.resolve(true)
         );
         spyOn(kinde.kindeClient, 'getUserProfile').mockReturnValue(
+            Promise.resolve(user)
+        );
+        spyOn(kinde.kindeClient, 'getUser').mockReturnValue(
             Promise.resolve(user)
         );
     });

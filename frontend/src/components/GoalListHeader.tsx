@@ -1,4 +1,4 @@
-import AddGoalDialgo from './AddGoalDialog';
+import AddGoalDialog from './AddGoalDialog';
 
 const GoalListHeader = () => {
     return (
@@ -6,7 +6,7 @@ const GoalListHeader = () => {
             <h1 className="text-3xl font-semibold text-center mb-6">
                 Goals List
             </h1>
-            <AddGoalDialgo />
+            <AddGoalDialog />
         </div>
     );
 };
