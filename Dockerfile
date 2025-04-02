@@ -20,8 +20,8 @@ RUN apt-get update -qq && \
 ### server
 
 # Install node modules
-COPY bun.lockb package.json ./
-RUN bun install
+COPY server/bun.lockb server/package.json ./
+RUN cd server && bun install
 
 # Copy application code
 COPY . .
@@ -34,6 +34,8 @@ RUN rm -rf node_modules && \
     bun install --ci
 
 ### frontend
+
+RUN cd ..
 
 # Install node modules
 COPY frontend/bun.lock frontend/package.json ./

@@ -13,6 +13,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - name: Build and Test Server
+        working-directory: server
         run: |
           bun install
           bun run build
