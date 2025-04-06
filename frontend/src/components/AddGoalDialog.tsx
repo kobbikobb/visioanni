@@ -10,28 +10,31 @@ import {
     DialogTitle,
     DialogFooter
 } from '@/components/ui/dialog';
-
-// TOOD: Use Input
-// TODO: Proper Date Picker
-// TODO: Per Field Errors
-// TODO: Show errors properly
+import { useAppForm } from '@/components/form';
 
 const AddGoalDialgo: React.FC = () => {
     const [open, setOpen] = useState(false);
 
-    const {
-        title,
-        date,
-        status,
-        handleTitleChange,
-        handleDateChange,
-        handleCreateGoal
-    } = useCreateGoal();
+    const { createGoal } = useCreateGoal({
+        onSuccessFn: () => {
+            setOpen(false);
+        }
+    });
 
-    const onHandleCreateGoal = async () => {
-        await handleCreateGoal();
-        setOpen(false);
-    };
+    const form = useAppForm({
+        onSubmit: async (values) => {
+            const { title, date } = values.value;
+            createGoal({ title, date });
+            // TODO: Failure
+            // TODO: Form
+            // TODO: Reset form
+        },
+
+        defaultValues: {
+            title: '',
+            date: new Date().toISOString().split('T')[0]
+        }
+    });
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -43,38 +46,41 @@ const AddGoalDialgo: React.FC = () => {
                     <DialogTitle>Add Goal</DialogTitle>
                 </DialogHeader>
 
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={handleTitleChange}
-                    className="w-full p-3 mb-3 rounded-md border"
-                />
-                <input
-                    type="date"
-                    value={date}
-                    onChange={handleDateChange}
-                    className="w-full p-3 mb-3 rounded-md border"
-                />
-                {status && (
-                    <p className="mt-4 text-center text-gray-600">{status}</p>
-                )}
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary">
-                            cancel
-                        </Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                        <Button
-                            type="submit"
-                            variant="default"
-                            onClick={onHandleCreateGoal}
-                        >
-                            Add Goal
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        form.handleSubmit();
+                    }}
+                >
+                    <form.AppField
+                        name="title"
+                        children={(field) => (
+                            <field.TextField
+                                label="Title"
+                                placeholder="Enter title"
+                            />
+                        )}
+                    />
+
+                    <form.AppField
+                        name="date"
+                        children={(field) => <field.DateField label="Date" />}
+                    />
+
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary">
+                                cancel
+                            </Button>
+                        </DialogClose>
+                        <DialogClose asChild>
+                            <form.AppForm>
+                                <form.SubscribeButton label="save" />
+                            </form.AppForm>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
             </DialogContent>
         </Dialog>
     );
