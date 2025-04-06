@@ -18,6 +18,11 @@ export const TextField = ({
                 onChange={(e) => field.handleChange(e.target.value)}
                 className="w-full p-3 mb-3 rounded-md border"
             />
+            {field.state.meta.errors.length > 0 ? (
+                <em className="text-red-600">
+                    {field.state.meta.errors.map((e) => e.message).join(', ')}
+                </em>
+            ) : null}
         </label>
     );
 };
