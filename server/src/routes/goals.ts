@@ -2,12 +2,12 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { getUser } from '../authMiddleware';
 import {
-    goalSchema,
     getGoals,
     findGoal,
     addGoal,
     deleteGoal
 } from '../repositories/goalRepository';
+import { goalSchema } from '../sharedTypes';
 
 const goalPostSchema = goalSchema.omit({ id: true, userId: true });
 

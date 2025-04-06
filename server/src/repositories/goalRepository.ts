@@ -1,20 +1,7 @@
-import { z } from 'zod';
 import { getDb } from '../db';
 import { goals as goalsTable } from '../db/schema/goals';
 import { eq, desc } from 'drizzle-orm';
-
-export const goalSchema = z.object({
-    id: z.number().int().positive(),
-    userId: z.string(),
-    title: z.string().min(1),
-    date: z
-        .string()
-        .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in the format yyyy-MM-dd'),
-    completed: z.boolean()
-});
-
-export type Goal = z.infer<typeof goalSchema>;
-export type GoalInput = Omit<Goal, 'id'>;
+import { type Goal, type GoalInput } from '../sharedTypes';
 
 export const getGoals = async (userId: string): Promise<Goal[]> => {
     const db = await getDb();
