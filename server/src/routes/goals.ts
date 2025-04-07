@@ -7,9 +7,7 @@ import {
     addGoal,
     deleteGoal
 } from '../repositories/goalRepository';
-import { goalSchema } from '../sharedTypes';
-
-const goalPostSchema = goalSchema.omit({ id: true, userId: true });
+import { goalPostSchema } from '../sharedTypes';
 
 export const goalsRoute = new Hono()
     .get('/', getUser, async (c) => {
@@ -30,8 +28,9 @@ export const goalsRoute = new Hono()
     })
     .post('/', getUser, zValidator('json', goalPostSchema), async (c) => {
         const user = c.var.user;
-        const goalInput = c.req.valid('json');
-        const created = await addGoal({ ...goalInput, userId: user.id });
+        const goal = c.req.valid('json');
+        const goalInput = { ...goal, userId: user.id, completed: false };
+        const created = await addGoal(goalInput);
         return c.json(created, 201);
     })
     .delete('/:id{[0-9]+}', getUser, async (c) => {
