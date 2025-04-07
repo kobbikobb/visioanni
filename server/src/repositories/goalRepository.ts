@@ -2,6 +2,7 @@ import { getDb } from '../db';
 import { goals as goalsTable } from '../db/schema/goals';
 import { eq, desc } from 'drizzle-orm';
 import { type Goal, type GoalInput } from '../sharedTypes';
+import { insertGoalSchema } from '../db/schema/goals';
 
 export const getGoals = async (userId: string): Promise<Goal[]> => {
     const db = await getDb();
@@ -15,7 +16,8 @@ export const getGoals = async (userId: string): Promise<Goal[]> => {
 
 export const addGoal = async (goal: GoalInput): Promise<Goal> => {
     const db = await getDb();
-    const created = await db.insert(goalsTable).values(goal).returning();
+    const validated = insertGoalSchema.parse(goal);
+    const created = await db.insert(goalsTable).values(validated).returning();
     return created[0];
 };
 
