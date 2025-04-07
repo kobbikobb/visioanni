@@ -11,7 +11,7 @@ import {
     DialogFooter
 } from '@/components/ui/dialog';
 import { useAppForm } from '@/components/form';
-import { goalInputSchema } from '@server/sharedTypes';
+import { goalPostSchema } from '@server/sharedTypes';
 
 const AddGoalDialgo: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ const AddGoalDialgo: React.FC = () => {
             date: new Date().toISOString().split('T')[0]
         },
         validators: {
-            onChange: goalInputSchema
+            onChange: goalPostSchema
         },
         onSubmit: async (values) => {
             const { title, date } = values.value;
