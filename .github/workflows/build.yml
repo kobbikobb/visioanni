@@ -15,9 +15,9 @@ jobs:
       - name: Build and Test Server
         run: |
           bun install
-          bun run build
           bun run prettier
           bun run lint
+          bun run build
           bun test
 
       # Frontend tasks
@@ -28,3 +28,4 @@ jobs:
           bun run lint
           bun run prettier
           bun run build
+          bun test

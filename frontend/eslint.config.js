@@ -7,7 +7,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config(
     eslintConfigPrettier,
-    { ignores: ['dist'] },
+    { ignores: ['dist', 'src/components/ui'] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
         files: ['**/*.{ts,tsx}'],
