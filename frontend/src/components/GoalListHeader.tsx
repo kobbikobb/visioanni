@@ -2,8 +2,8 @@ import AddGoalDialog from './AddGoalDialog';
 
 const GoalListHeader = () => {
     return (
-        <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-semibold text-center mb-6">
+        <div className="flex items-center justify-between p-4 mb-6 bg-muted rounded-xl shadow-sm">
+            <h1 className="text-2xl font-semibold text-foreground">
                 Goals List
             </h1>
             <AddGoalDialog />

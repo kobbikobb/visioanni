@@ -40,7 +40,7 @@ const AddGoalDialgo: React.FC = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline">Add Goal</Button>
+                <Button>Add Goal</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -72,12 +72,12 @@ const AddGoalDialgo: React.FC = () => {
                     <DialogFooter>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary">
-                                cancel
+                                Cancel
                             </Button>
                         </DialogClose>
                         <DialogClose asChild>
                             <form.AppForm>
-                                <form.SubscribeButton label="save" />
+                                <form.SubscribeButton label="Save" />
                             </form.AppForm>
                         </DialogClose>
                     </DialogFooter>
