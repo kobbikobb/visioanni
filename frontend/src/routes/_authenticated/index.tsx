@@ -1,9 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+const Index = () => <div>Welcome home "/"!</div>;
+
 export const Route = createFileRoute('/_authenticated/')({
     component: Index
 });
-
-function Index() {
-    return <div>Welcome home "/"!</div>;
-}

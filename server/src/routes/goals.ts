@@ -12,7 +12,8 @@ import { goalPostSchema } from '../sharedTypes';
 export const goalsRoute = new Hono()
     .get('/', getUser, async (c) => {
         const user = c.var.user;
-        return c.json({ goals: await getGoals(user.id) });
+        const goals = await getGoals(user.id);
+        return c.json({ goals });
     })
     .get('/:id{[0-9]+}', getUser, async (c) => {
         const user = c.var.user;
