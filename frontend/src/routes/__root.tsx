@@ -19,7 +19,7 @@ const TanStackRouterDevtools =
               }))
           );
 
-const Nav = () => {
+const NavigationLinks = () => {
     return (
         <div className="p-2 flex gap-2 max-w-2xl m-auto">
             <Link to="/" className="[&.active]:font-bold">
@@ -38,10 +38,10 @@ const Nav = () => {
     );
 };
 
-const Root = () => {
+const NavigationRoot = () => {
     return (
         <>
-            <Nav />
+            <NavigationLinks />
             <hr />
             <div className="mp-2 gap-2 max-w-4xl mx-auto p-4">
                 <Outlet />
@@ -54,5 +54,5 @@ const Root = () => {
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-    component: Root
+    component: NavigationRoot
 });

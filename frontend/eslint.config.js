@@ -24,7 +24,14 @@ export default tseslint.config(
             'react-refresh/only-export-components': [
                 'warn',
                 { allowConstantExport: true }
-            ]
+            ],
+            'prefer-arrow-callback': 'error',
+            'func-style': ['error', 'expression']
+        },
+        settings: {
+            react: {
+                version: 'detect' // Helps with other react rules if needed
+            }
         }
     }
 );
