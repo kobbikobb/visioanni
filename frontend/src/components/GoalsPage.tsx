@@ -1,5 +1,5 @@
 import GoalListHeader from './GoalListHeader';
-import GoalList from './GoalList';
+import GoalList from './GoalsList';
 
 export default function GoalPage() {
     return (
