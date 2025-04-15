@@ -1,16 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createGoal } from '@/api/goalApi';
+import { deleteGoal } from '@/api/goalApi';
 import { toast } from 'sonner';
 import { getErrorMessage } from '@/utils/errorUtils';
 
-export const useCreateGoal = ({ onSuccessFn }: { onSuccessFn: () => void }) => {
+export const useDeleteGoal = () => {
     const queryClient = useQueryClient();
 
-    const createGoalMutation = useMutation({
-        mutationFn: createGoal,
+    const deleteGoalMutation = useMutation({
+        mutationFn: (id: number) => deleteGoal(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['query-goals'] });
-            onSuccessFn();
         },
         onError: (error: unknown) => {
             toast(getErrorMessage(error));
@@ -18,9 +17,7 @@ export const useCreateGoal = ({ onSuccessFn }: { onSuccessFn: () => void }) => {
     });
 
     return {
-        createGoal: createGoalMutation.mutate,
-        status: createGoalMutation.status,
-        error: createGoalMutation.error,
-        isPending: createGoalMutation.isPending
+        deleteGoal: deleteGoalMutation.mutate,
+        isPending: deleteGoalMutation.isPending
     };
 };
