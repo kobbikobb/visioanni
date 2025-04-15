@@ -27,7 +27,7 @@ RUN bun install
 COPY . .
 
 # Build server
-RUN bun --bun run build
+RUN bun --bun run prod:build
 
 # Remove development dependencies
 RUN rm -rf node_modules && \
