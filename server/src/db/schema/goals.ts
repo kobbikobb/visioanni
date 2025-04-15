@@ -7,7 +7,11 @@ import {
     index,
     timestamp
 } from 'drizzle-orm/pg-core';
-import { createSelectSchema, createInsertSchema } from 'drizzle-zod';
+import {
+    createSelectSchema,
+    createInsertSchema,
+    createUpdateSchema
+} from 'drizzle-zod';
 import { z } from 'zod';
 
 export const goals = pgTable(
@@ -34,3 +38,4 @@ export const insertGoalSchema = createInsertSchema(goals, {
 });
 
 export const selectGoalSchema = createSelectSchema(goals);
+export const updateGoalSchema = createUpdateSchema(goals);

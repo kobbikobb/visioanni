@@ -6,8 +6,7 @@ import { type UserType } from '@kinde-oss/kinde-typescript-sdk';
 const aGoal = () => {
     return {
         title: 'New Goal',
-        date: '2021-01-01',
-        completed: false
+        date: '2021-01-01'
     };
 };
 
@@ -18,6 +17,16 @@ const getData = (path: string) => {
 const postData = (path: string, obj: object) => {
     return app.request(path, {
         method: 'POST',
+        body: JSON.stringify(obj),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
+
+const putData = (path: string, obj: object) => {
+    return app.request(path, {
+        method: 'PUT',
         body: JSON.stringify(obj),
         headers: {
             'Content-Type': 'application/json'
@@ -80,6 +89,26 @@ describe('Goals API', () => {
         expect(newGoalResponse.status).toBe(201);
         const goalData = await newGoalResponse.json();
         expect(goalData).toMatchObject(newGoal);
+    });
+
+    it('should PUT a goal to update it', async () => {
+        const newGoal = aGoal();
+        const newGoalResponse = await postData('/api/goals', newGoal);
+        const id = (await newGoalResponse.json()).id;
+
+        const updatedGoal = {
+            title: 'Updated Goal',
+            date: '2022-02-02',
+            completed: true
+        };
+        const updatedGoalResponse = await putData(
+            `api/goals/${id}`,
+            updatedGoal
+        );
+
+        expect(updatedGoalResponse.status).toBe(200);
+        const goalData = await updatedGoalResponse.json();
+        expect(goalData).toMatchObject(updatedGoal);
     });
 
     it('should DELETE goal', async () => {
