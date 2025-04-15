@@ -5,6 +5,13 @@ type createGoalParams = {
     date: string;
 };
 
+type updateGoalParams = {
+    id: number;
+    title: string;
+    date: string;
+    completed: boolean;
+};
+
 export const createGoal = async ({
     title,
     date
@@ -35,5 +42,24 @@ export const deleteGoal = async (id: number) => {
     });
     if (!response.ok) {
         throw new Error('Failed to delete goal.');
+    }
+};
+
+export const updateGoal = async ({
+    id,
+    title,
+    date,
+    completed
+}: updateGoalParams): Promise<void> => {
+    const response = await api.goals[':id{[0-9]+}'].$put({
+        param: { id: id.toString() },
+        json: {
+            title,
+            date,
+            completed
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Failed to update goal.');
     }
 };

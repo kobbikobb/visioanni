@@ -1,4 +1,6 @@
 import DeleteGoalButton from './DeleteGoalButton';
+import GoalCompletedCheckbox from './GoalCompletedCheckbox';
+import { Goal } from '@server/sharedTypes';
 
 const GoalCard = ({ goal }: { goal: Goal }) => (
     <div
@@ -15,10 +17,8 @@ const GoalCard = ({ goal }: { goal: Goal }) => (
             {new Date(goal.date).toLocaleDateString()}
         </p>
 
-        <div
-            className={`mt-2 text-sm font-medium ${goal.completed ? 'text-green-500' : 'text-red-500'}`}
-        >
-            {goal.completed ? 'Completed' : 'Not Completed'}
+        <div className="mt-2">
+            <GoalCompletedCheckbox goal={goal} />
         </div>
     </div>
 );
