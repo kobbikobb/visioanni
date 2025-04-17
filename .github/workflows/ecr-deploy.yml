@@ -1,0 +1,40 @@
+name: Build and Push to Public ECR
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+    id-token: write # This is required for requesting the JWT
+
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: arn:aws:iam::779377485039:role/github.to.aws.oicd
+                  aws-region: us-east-1
+
+            - name: Login to Amazon public ECR
+              id: login-ecr-public
+              uses: aws-actions/amazon-ecr-login@v4
+              with:
+                  registry-type: public
+
+            - name: Build Docker image
+              run: |
+                  docker build -t visioanni .
+
+            - name: Tag Docker image
+              run: |
+                  docker tag visioanni:latest public.ecr.aws/q3b8h4t9/visioanni:latest
+
+            - name: Push Docker image
+              run: |
+                  docker push public.ecr.aws/q3b8h4t9/visioanni:latest
