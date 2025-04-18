@@ -3,7 +3,7 @@ output "ecr_repository_url" {
   value       = module.ecr.repository_uri
 }
 
-output "ecs_execution_role_arn" {
-  description = "ARN of the ECS execution role"
-  value       = module.iam.ecs_execution_role_arn
+output "vpc_id" {
+  description = "The VPC id"
+  value       = module.vpc.vpc_id
 }
