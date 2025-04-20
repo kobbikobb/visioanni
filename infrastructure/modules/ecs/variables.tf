@@ -40,6 +40,7 @@ variable "container_port" {
   type        = number
   default     = 3000
 }
+
 variable "execution_role_arn" {
   description = "ARN of the task execution role"
   type        = string
@@ -49,4 +50,25 @@ variable "desired_count" {
   description = "Number of desired tasks"
   type        = number
   default     = 1
+}
+
+variable "env_vars" {
+  description = "Environment variables for the ECS container"
+  type        = map(string)
+  sensitive   = true
+}
+
+variable "alb_sg_id" {
+  description = "ALB Security Group Id"
+  type        = string
+}
+
+variable "target_group_arn" {
+  description = "The ALB target group arn"
+  type        = string
+}
+
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
 }

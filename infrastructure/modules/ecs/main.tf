@@ -4,11 +4,11 @@ resource "aws_security_group" "ecs_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "Allow HTTP traffic on the relevant port"
-    from_port   = var.container_port
-    to_port     = var.container_port
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    description     = "Allow HTTP traffic on the relevant port"
+    from_port       = var.container_port
+    to_port         = var.container_port
+    protocol        = "tcp"
+    security_groups = [var.alb_sg_id]
   }
 
   egress {
@@ -22,6 +22,11 @@ resource "aws_security_group" "ecs_sg" {
 
 resource "aws_ecs_cluster" "main" {
   name = var.name
+}
+
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name              = "/ecs/${var.name}"
+  retention_in_days = 7
 }
 
 resource "aws_ecs_task_definition" "main" {
@@ -44,6 +49,20 @@ resource "aws_ecs_task_definition" "main" {
           protocol      = "tcp"
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.ecs_log_group.name
+          awslogs-region        = var.aws_region
+          awslogs-stream-prefix = "ecs"
+        }
+      }
+      environment = [
+        for key, value in var.env_vars : {
+          name  = key
+          value = value
+        }
+      ]
     }
   ])
 }
@@ -59,6 +78,12 @@ resource "aws_ecs_service" "main" {
     subnets          = var.subnet_ids
     security_groups  = [aws_security_group.ecs_sg.id]
     assign_public_ip = true
+  }
+
+  load_balancer {
+    target_group_arn = var.target_group_arn # Pass from your ALB module
+    container_name   = var.container_name   # Must match container name in task definition
+    container_port   = var.container_port   # Must match exposed port
   }
 }
 
