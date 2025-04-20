@@ -17,10 +17,11 @@ module "vpc" {
 module "alb" {
   source = "./modules/alb"
 
-  name           = "visioanni-alb"
-  vpc_id         = module.vpc.vpc_id
-  subnets        = module.vpc.public_subnet_ids
-  container_port = var.container_port
+  name              = "visioanni-alb"
+  vpc_id            = module.vpc.vpc_id
+  subnets           = module.vpc.public_subnet_ids
+  container_port    = var.container_port
+  health_check_path = "health"
 }
 
 module "ecs" {

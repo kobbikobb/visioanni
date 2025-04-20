@@ -44,6 +44,13 @@ resource "aws_ecs_task_definition" "main" {
           protocol      = "tcp"
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = "/ecs/${var.name}"
+          awslogs-stream-prefix = "ecs"
+        }
+      }
       environment = [
         for key, value in var.env_vars : {
           name  = key
