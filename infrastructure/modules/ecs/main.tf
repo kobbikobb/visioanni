@@ -24,6 +24,11 @@ resource "aws_ecs_cluster" "main" {
   name = var.name
 }
 
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name              = "/ecs/${var.name}"
+  retention_in_days = 7
+}
+
 resource "aws_ecs_task_definition" "main" {
   family                   = "${var.name}-task"
   requires_compatibilities = ["FARGATE"]
@@ -47,7 +52,8 @@ resource "aws_ecs_task_definition" "main" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/${var.name}"
+          awslogs-group         = aws_cloudwatch_log_group.ecs_log_group.name
+          awslogs-region        = var.aws_region
           awslogs-stream-prefix = "ecs"
         }
       }

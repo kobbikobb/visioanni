@@ -67,3 +67,8 @@ variable "target_group_arn" {
   description = "The ALB target group arn"
   type        = string
 }
+
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+}
