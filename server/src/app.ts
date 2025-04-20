@@ -12,6 +12,10 @@ app.get('/test', (c) => {
     return c.json({ message: 'test result' });
 });
 
+app.get('/health', (c) => {
+    return c.text('OK', 200);
+});
+
 // eslint-disable-next-line
 const apiRoutes = app
     .basePath('/api')
