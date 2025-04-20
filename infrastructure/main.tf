@@ -21,7 +21,7 @@ module "alb" {
   vpc_id            = module.vpc.vpc_id
   subnets           = module.vpc.public_subnet_ids
   container_port    = var.container_port
-  health_check_path = "health"
+  health_check_path = "/health"
 }
 
 module "ecs" {
@@ -40,5 +40,6 @@ module "ecs" {
   alb_sg_id          = module.alb.alb_sg_id
   target_group_arn   = module.alb.target_group_arn
   env_vars           = var.env_vars
+  aws_region         = var.aws_region
 }
 
