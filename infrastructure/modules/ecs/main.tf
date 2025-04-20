@@ -44,6 +44,12 @@ resource "aws_ecs_task_definition" "main" {
           protocol      = "tcp"
         }
       ]
+      environment = [
+        for key, value in var.env_vars : {
+          name  = key
+          value = value
+        }
+      ]
     }
   ])
 }

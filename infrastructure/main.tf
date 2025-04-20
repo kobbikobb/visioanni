@@ -26,4 +26,5 @@ module "ecs" {
   container_image    = module.ecr.repository_uri
   execution_role_arn = module.iam.ecs_execution_role_arn
   desired_count      = 1
+  env_vars           = var.env_vars
 }
