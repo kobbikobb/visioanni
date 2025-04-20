@@ -50,3 +50,9 @@ variable "desired_count" {
   type        = number
   default     = 1
 }
+
+variable "env_vars" {
+  description = "Environment variables for the ECS container"
+  type        = map(string)
+  sensitive   = true
+}
