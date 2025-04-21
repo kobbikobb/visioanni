@@ -1,23 +1,30 @@
 import React from 'react';
-import Card from './Card';
-import PageHeader from './PageHeader';
+import Card from '../content/Card';
+import PageHeader from '../header/PageHeader';
+import HeaderTitle from '../header/HeaderTitle';
 
 export default function AboutPage() {
     return (
         <main>
             <section className="space-y-4">
                 <PageHeader>
-                    <h1 className="text-2xl font-bold text-purple-900 dark:text-purple-100">
-                        About VisioAnni
-                    </h1>
+                    <HeaderTitle>About VisioAnni</HeaderTitle>
                 </PageHeader>
                 <div className="grid gap-4 sm:grid-cols-2">
                     <FeatureCard
-                        title="Contribute yourself"
+                        title="About the Author"
+                        description="I am Jakob, a Software Developer from Iceland."
+                    />
+                    <FeatureCard
+                        title="Best Practices"
+                        description="Quality code and best practices!"
+                    />
+                    <FeatureCard
+                        title="Contribute Yourself"
                         description="VisioAnni is an open source project anyone can contribute to!"
                     />
                     <FeatureCard
-                        title="Questions and feedback"
+                        title="Questions & Feedback"
                         description="See our open source GitHub repository."
                     />
                 </div>

@@ -2,7 +2,8 @@ import React from 'react';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import PageHeader from './PageHeader';
+import PageHeader from '../header/PageHeader';
+import HeaderTitle from '../header/HeaderTitle';
 
 const ProfilePage = () => {
     const { user, isUserPending } = useCurrentUser();
@@ -25,9 +26,10 @@ const ProfilePage = () => {
                             {user.given_name?.substring(0, 1)}
                         </AvatarFallback>
                     </Avatar>
-                    <h1 className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+
+                    <HeaderTitle>
                         You are logged in, {user.given_name}
-                    </h1>
+                    </HeaderTitle>
                 </div>
 
                 <div className="ml-auto">
