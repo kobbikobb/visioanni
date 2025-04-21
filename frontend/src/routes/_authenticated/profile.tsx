@@ -1,4 +1,4 @@
-import ProfilePage from '@/components/ProfilePage';
+import ProfilePage from '@/components/profile/ProfilePage';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_authenticated/profile')({

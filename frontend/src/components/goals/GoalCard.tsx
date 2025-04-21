@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteGoalButton from './DeleteGoalButton';
 import GoalCompletedCheckbox from './GoalCompletedCheckbox';
 import { Goal } from '@server/sharedTypes';
-import Card from './Card';
+import Card from '../content/Card';
 
 const GoalCard = ({ goal }: { goal: Goal }) => (
     <Card key={goal.id} className="relative">
