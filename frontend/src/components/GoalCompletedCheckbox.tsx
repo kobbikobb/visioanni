@@ -22,13 +22,14 @@ const GoalCompletedCheckbox = ({ goal }: { goal: Goal }) => {
                 disabled={isPending}
                 onCheckedChange={toggleCompleted}
                 checked={goal.completed}
+                className="w-5 h-5 border border-gray-400 bg-white dark:bg-gray-800 dark:border-gray-600 data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500 transition-colors"
             />
             <div className="grid gap-1.5 leading-none">
                 <label
                     htmlFor={checkboxId}
-                    className={`font-medium text-sm ${goal.completed ? 'text-green-500' : 'text-red-500'}`}
+                    className={`font-medium text-sm ${goal.completed ? 'text-green-500' : 'text-gray-400'}`}
                 >
-                    Completed
+                    {goal.completed ? 'Completed' : 'Mark as Completed'}
                 </label>
             </div>
         </div>

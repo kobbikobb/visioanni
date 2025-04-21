@@ -10,9 +10,9 @@ const DeleteGoalButton = ({ id }: { id: number }) => {
             onClick={() => deleteGoal(id)}
             disabled={isPending}
             variant="ghost"
-            className="hover:bg-red-100"
+            className="text-gray-400 hover:text-red-500 transition-colors"
         >
-            <Trash className="h-4 w-4 text-red-700" />
+            <Trash className="h-4 w-4 text-red-600" />
         </Button>
     );
 };
