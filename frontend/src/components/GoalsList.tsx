@@ -13,7 +13,7 @@ const GoalsList: React.FC = () => {
     }
 
     return (
-        <div className="mt-4 space-y-6">
+        <div className="mt-4 space-y-4">
             {goals.map((goal) => (
                 <GoalCard goal={goal} />
             ))}

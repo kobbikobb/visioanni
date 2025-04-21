@@ -12,7 +12,7 @@ describe('App', () => {
         fireEvent.click(aboutTab);
 
         await waitFor(() => {
-            const aboutContents = screen.getByText(/About this app/i);
+            const aboutContents = screen.getByText(/About VisioAnni/i);
             expect(aboutContents).toBeInTheDocument();
         });
     });
