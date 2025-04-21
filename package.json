@@ -19,7 +19,7 @@
         "@flydotio/dockerfile": "^0.7.8",
         "@types/bun": "latest",
         "@types/pg": "^8.11.11",
-        "drizzle-kit": "^0.30.6",
+        "drizzle-kit": "^0.31.0",
         "eslint": "^9.18.0",
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-prettier": "^5.2.3",
