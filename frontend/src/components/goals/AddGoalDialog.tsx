@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { useAppForm } from '@/components/form';
 import { goalPostSchema } from '@server/sharedTypes';
+import { toDateString } from '../utils/dateUtils';
 
 const AddGoalDialgo: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -19,13 +20,14 @@ const AddGoalDialgo: React.FC = () => {
     const { createGoal } = useCreateGoal({
         onSuccessFn: () => {
             setOpen(false);
+            form.reset();
         }
     });
 
     const form = useAppForm({
         defaultValues: {
             title: '',
-            date: new Date().toISOString().split('T')[0]
+            date: toDateString(new Date())
         },
         validators: {
             onChange: goalPostSchema
@@ -71,7 +73,11 @@ const AddGoalDialgo: React.FC = () => {
 
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button type="button" variant="secondary">
+                            <Button
+                                type="button"
+                                variant="secondary"
+                                onClick={() => form.reset()}
+                            >
                                 Cancel
                             </Button>
                         </DialogClose>
