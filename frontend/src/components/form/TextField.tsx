@@ -16,7 +16,7 @@ export const TextField = ({
                 placeholder={placeholder}
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="w-full p-3 mb-3 rounded-md border"
+                className="w-full mt-1 p-3 mb-3 rounded-md border"
             />
             {field.state.meta.errors.length > 0 ? (
                 <em className="text-red-600">
