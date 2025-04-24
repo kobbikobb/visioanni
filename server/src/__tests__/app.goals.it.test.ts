@@ -3,6 +3,8 @@ import app from '../app';
 import * as kinde from '../kinde';
 import { type UserType } from '@kinde-oss/kinde-typescript-sdk';
 
+// TODO: Extract common bits
+
 const aGoal = () => {
     return {
         title: 'New Goal',

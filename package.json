@@ -8,6 +8,7 @@
         "dev": "bun --watch server/src/index.ts",
         "prod:build": "NODE_ENV=production bun build server/src/index.ts --outdir dist --target=node",
         "prod:migrate": "NODE_ENV=production bun run server/src/db/migrate.ts",
+        "drizzle:generate": "drizzle-kit generate",
         "prod": "NODE_ENV=production bun run dist/index.js",
         "lint": "eslint server/src",
         "lint:fix": "eslint server/src --fix",

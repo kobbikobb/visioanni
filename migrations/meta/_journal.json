@@ -22,6 +22,13 @@
       "when": 1743411116618,
       "tag": "0002_bent_demogoblin",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1745504123104,
+      "tag": "0003_funny_moon_knight",
+      "breakpoints": true
     }
   ]
 }
