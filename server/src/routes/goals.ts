@@ -44,10 +44,10 @@ export const goalsRoute = new Hono()
             const id = Number.parseInt(c.req.param('id'));
             const existingGoal = await findGoal(id);
             if (!existingGoal) {
-                return c.json({ message: 'Goal not found' }, 404);
+                return c.json({ message: 'Goal not found.' }, 404);
             }
             if (existingGoal.userId !== user.id) {
-                return c.json({ message: 'Not your goal' }, 403);
+                return c.json({ message: 'Illegal request.' }, 403);
             }
 
             const goalJson = c.req.valid('json');
@@ -62,10 +62,10 @@ export const goalsRoute = new Hono()
         const id = Number.parseInt(c.req.param('id'));
         const goal = await findGoal(id);
         if (!goal) {
-            return c.json({ message: 'Goal not found' }, 404);
+            return c.json({ message: 'Goal not found.' }, 404);
         }
         if (goal.userId !== user.id) {
-            return c.json({ message: 'Not your goal' }, 403);
+            return c.json({ message: 'Illegal request.' }, 403);
         }
         await deleteGoal(id);
 

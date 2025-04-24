@@ -1,62 +1,20 @@
-import { describe, it, expect, beforeEach, spyOn } from 'bun:test';
-import app from '../app';
-import * as kinde from '../kinde';
+import { describe, it, expect, beforeEach } from 'bun:test';
 import { type UserType } from '@kinde-oss/kinde-typescript-sdk';
-
-// TODO: Extract common bits
-
-const aGoal = () => {
-    return {
-        title: 'New Goal',
-        date: '2021-01-01'
-    };
-};
-
-const getData = (path: string) => {
-    return app.request(path);
-};
-
-const postData = (path: string, obj: object) => {
-    return app.request(path, {
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-};
-
-const putData = (path: string, obj: object) => {
-    return app.request(path, {
-        method: 'PUT',
-        body: JSON.stringify(obj),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-};
-
-const deleteData = (path: string) => {
-    return app.request(path, {
-        method: 'DELETE'
-    });
-};
+import {
+    aGoal,
+    deleteData,
+    getData,
+    postData,
+    putData
+} from './helpers/apiHelper';
+import { asAuthenticatedUser } from './helpers/kindeHelper';
 
 describe('Goals API', () => {
     const userId = 'user-id-1';
 
     beforeEach(() => {
         const user = { id: userId } as UserType;
-
-        spyOn(kinde.kindeClient, 'isAuthenticated').mockReturnValue(
-            Promise.resolve(true)
-        );
-        spyOn(kinde.kindeClient, 'getUserProfile').mockReturnValue(
-            Promise.resolve(user)
-        );
-        spyOn(kinde.kindeClient, 'getUser').mockReturnValue(
-            Promise.resolve(user)
-        );
+        asAuthenticatedUser(user);
     });
 
     it('should GET goals', async () => {
