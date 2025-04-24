@@ -14,7 +14,7 @@ import {
 } from 'drizzle-zod';
 import { z } from 'zod';
 
-export const goals = pgTable(
+export const goalsTable = pgTable(
     'goals',
     {
         id: serial('id').primaryKey(),
@@ -27,7 +27,7 @@ export const goals = pgTable(
     (table) => [index('user_id_idx').on(table.userId)]
 );
 
-export const insertGoalSchema = createInsertSchema(goals, {
+export const insertGoalSchema = createInsertSchema(goalsTable, {
     userId: z.string().nonempty('User id is required'),
     title: z.string().nonempty('Title is required'),
     date: z
@@ -37,5 +37,5 @@ export const insertGoalSchema = createInsertSchema(goals, {
     completed: z.boolean()
 });
 
-export const selectGoalSchema = createSelectSchema(goals);
-export const updateGoalSchema = createUpdateSchema(goals);
+export const selectGoalSchema = createSelectSchema(goalsTable);
+export const updateGoalSchema = createUpdateSchema(goalsTable);

@@ -1,5 +1,5 @@
 import { getDb } from '../db';
-import { goals as goalsTable } from '../db/schema/goals';
+import { goalsTable } from '../db/schema/goals';
 import { eq, desc } from 'drizzle-orm';
 import { type Goal, type GoalInsert, type GoalUpdate } from '../sharedTypes';
 import { insertGoalSchema, updateGoalSchema } from '../db/schema/goals';
