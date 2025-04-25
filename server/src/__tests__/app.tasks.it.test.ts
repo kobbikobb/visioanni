@@ -1,6 +1,12 @@
 import { describe, it, expect, beforeEach } from 'bun:test';
 import type { UserType } from '@kinde-oss/kinde-typescript-sdk';
-import { aGoal, deleteData, getData, postData } from './helpers/apiHelper';
+import {
+    aGoal,
+    deleteData,
+    getData,
+    postData,
+    putData
+} from './helpers/apiHelper';
 import { asAuthenticatedUser } from './helpers/kindeHelper';
 
 describe('Task API', () => {
@@ -26,6 +32,13 @@ describe('Task API', () => {
         expect(newTaskData).toMatchObject({ title: 'Setup infra' });
     });
 
+    it('should POST a new task for a goal not found', async () => {
+        const newTask = { title: 'Setup infra' };
+        const newTaskResponse = await postData(`api/goals/9999/tasks`, newTask);
+
+        expect(newTaskResponse.status).toBe(404);
+    });
+
     it('should GET a task', async () => {
         // Arrange
         const newGoalResponse = await postData('/api/goals', aGoal());
@@ -49,7 +62,31 @@ describe('Task API', () => {
         expect(existingTaskData).toMatchObject({ title: 'Setup infra' });
     });
 
-    it('should Delete a task', async () => {
+    it('should PUT a task', async () => {
+        // Arrange
+        const newGoalResponse = await postData('/api/goals', aGoal());
+        const newGoalData = await newGoalResponse.json();
+
+        const newTask = { title: 'Setup infra' };
+        const newTaskResponse = await postData(
+            `api/goals/${newGoalData.id}/tasks`,
+            newTask
+        );
+        const newTaskData = await newTaskResponse.json();
+
+        // Act
+        const updateTaskResponse = await putData(
+            `/api/goals/${newGoalData.id}/tasks/${newTaskData.id}`,
+            { title: 'New infra' }
+        );
+
+        // Assert
+        expect(updateTaskResponse.status).toBe(200);
+        const updateTaskResponseData = await updateTaskResponse.json();
+        expect(updateTaskResponseData).toMatchObject({ title: 'New infra' });
+    });
+
+    it('should DELETE a task', async () => {
         // Arrange
         const newGoalResponse = await postData('/api/goals', aGoal());
         const newGoalData = await newGoalResponse.json();
@@ -68,9 +105,9 @@ describe('Task API', () => {
 
         // Assert
         expect(deleteTaskResponse.status).toBe(204);
-        // const goalResponse = await getData(
-        //     `/api/goals/${newGoalData.id}/tasks/${newTaskData.id}`
-        // );
-        // expect(goalResponse.status).toBe(404);
+        const goalResponse = await getData(
+            `/api/goals/${newGoalData.id}/tasks/${newTaskData.id}`
+        );
+        expect(goalResponse.status).toBe(404);
     });
 });

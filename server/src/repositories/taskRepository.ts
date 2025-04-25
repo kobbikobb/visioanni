@@ -1,7 +1,11 @@
 import { getDb } from '../db';
-import { type Task, type TaskInsert } from '../sharedTypes';
+import { type Task, type TaskInsert, type TaskUpdate } from '../sharedTypes';
 import { eq } from 'drizzle-orm';
-import { insertTaskSchema, tasksTable } from '../db/schema/tasks';
+import {
+    insertTaskSchema,
+    tasksTable,
+    updateTaskSchema
+} from '../db/schema/tasks';
 
 export const addTask = async (task: TaskInsert): Promise<Task> => {
     const db = await getDb();
@@ -28,6 +32,17 @@ export const getTasks = async (goalId: number): Promise<Task[]> => {
         .from(tasksTable)
         .where(eq(tasksTable.goalId, goalId));
     return tasks;
+};
+
+export const updateTask = async (task: TaskUpdate): Promise<Task> => {
+    const db = await getDb();
+    const validated = updateTaskSchema.parse(task);
+    const updated = await db
+        .update(tasksTable)
+        .set(validated)
+        .where(eq(tasksTable.id, task.id!))
+        .returning();
+    return updated[0];
 };
 
 export const deleteTask = async (id: number): Promise<Task> => {

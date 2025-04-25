@@ -1,42 +1,14 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { getUser } from '../authMiddleware';
-import { addTask, deleteTask, findTask } from '../repositories/taskRepository';
-import { taskPostSchema, type Task } from '../sharedTypes';
-import { findGoal } from '../repositories/goalRepository';
-import type { ContentfulStatusCode } from 'hono/utils/http-status';
-
-type ValidationError =
-    | { message: string; status: ContentfulStatusCode }
-    | undefined;
-
-const validateGoal = async (
-    goalId: number,
-    userId: string
-): Promise<ValidationError> => {
-    const existingGoal = await findGoal(goalId);
-    if (!existingGoal) {
-        return { message: 'Not found.', status: 404 };
-    }
-    if (existingGoal.userId !== userId) {
-        return { message: 'Not permitted.', status: 403 };
-    }
-    return undefined;
-};
-
-const validateTask = async (
-    task: Task | undefined,
-    goalId: number,
-    userId: string
-): Promise<ValidationError> => {
-    if (!task) {
-        return { message: 'Not found.', status: 404 };
-    }
-    if (task.goalId !== goalId) {
-        return { message: 'Not permitted.', status: 403 };
-    }
-    return validateGoal(goalId, userId);
-};
+import {
+    addTask,
+    deleteTask,
+    findTask,
+    updateTask
+} from '../repositories/taskRepository';
+import { taskPostSchema, taskPutSchema } from '../sharedTypes';
+import { validateGoalId, validateTask } from './util/validation';
 
 export const tasksRoute = new Hono()
     .post(
@@ -47,14 +19,14 @@ export const tasksRoute = new Hono()
             const user = c.var.user;
             const goalId = Number.parseInt(c.req.param('goalId'));
 
-            const error = await validateGoal(goalId, user.id);
+            const error = await validateGoalId(goalId, user.id);
             if (error) {
                 return c.json({ message: error.message }, error.status);
             }
-            const taskJson = c.req.valid('json');
 
-            const task = { ...taskJson, goalId };
-            const created = await addTask(task);
+            const taskCreateJson = c.req.valid('json');
+            const taskCreate = { ...taskCreateJson, goalId };
+            const created = await addTask(taskCreate);
 
             return c.json(created, 201);
         }
@@ -64,26 +36,45 @@ export const tasksRoute = new Hono()
         const goalId = Number.parseInt(c.req.param('goalId'));
         const taskId = Number.parseInt(c.req.param('taskId'));
 
-        const task = await findTask(taskId);
-        const error = await validateTask(task, goalId, user.id);
+        const existingTask = await findTask(taskId);
+        const error = await validateTask(existingTask, goalId, user.id);
         if (error) {
             return c.json({ message: error.message }, error.status);
         }
 
-        return c.json(task, 200);
+        return c.json(existingTask, 200);
     })
+    .put(
+        '/:goalId{[0-9]+}/tasks/:taskId{[0-9]+}',
+        getUser,
+        zValidator('json', taskPutSchema),
+        async (c) => {
+            const user = c.var.user;
+            const goalId = Number.parseInt(c.req.param('goalId'));
+            const taskId = Number.parseInt(c.req.param('taskId'));
+
+            const existingTask = await findTask(taskId);
+            const error = await validateTask(existingTask, goalId, user.id);
+            if (error) {
+                return c.json({ message: error.message }, error.status);
+            }
+
+            const taskUpdateJson = c.req.valid('json');
+            const taskUpdate = { ...taskUpdateJson, id: taskId };
+            const updatedTask = await updateTask(taskUpdate);
+
+            return c.json(updatedTask);
+        }
+    )
     .delete('/:goalId{[0-9]+}/tasks/:taskId{[0-9]+}', getUser, async (c) => {
         const user = c.var.user;
         const goalId = Number.parseInt(c.req.param('goalId'));
         const taskId = Number.parseInt(c.req.param('taskId'));
 
-        const task = await findTask(taskId);
-        const validationError = await validateTask(task, goalId, user.id);
-        if (validationError) {
-            return c.json(
-                { message: validationError.message },
-                validationError.status
-            );
+        const existingTask = await findTask(taskId);
+        const error = await validateTask(existingTask, goalId, user.id);
+        if (error) {
+            return c.json({ message: error.message }, error.status);
         }
 
         await deleteTask(taskId);
