@@ -62,6 +62,34 @@ describe('Task API', () => {
         expect(existingTaskData).toMatchObject({ title: 'Setup infra' });
     });
 
+    it('should GET tasks', async () => {
+        // Arrange
+        const newGoalResponse = await postData('/api/goals', aGoal());
+        const newGoalData = await newGoalResponse.json();
+
+        await postData(`api/goals/${newGoalData.id}/tasks`, {
+            title: 'Setup infra'
+        });
+        await postData(`api/goals/${newGoalData.id}/tasks`, {
+            title: 'Setup code'
+        });
+        // Act
+        const existingTasksResponse = await getData(
+            `/api/goals/${newGoalData.id}/tasks`
+        );
+
+        // Assert
+        expect(existingTasksResponse.status).toBe(200);
+        const existingTasksData = await existingTasksResponse.json();
+        expect(existingTasksData.tasks).toHaveLength(2);
+        expect(existingTasksData.tasks[0]).toMatchObject({
+            title: 'Setup infra'
+        });
+        expect(existingTasksData.tasks[1]).toMatchObject({
+            title: 'Setup code'
+        });
+    });
+
     it('should PUT a task', async () => {
         // Arrange
         const newGoalResponse = await postData('/api/goals', aGoal());

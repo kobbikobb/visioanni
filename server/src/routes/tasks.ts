@@ -5,6 +5,7 @@ import {
     addTask,
     deleteTask,
     findTask,
+    getTasks,
     updateTask
 } from '../repositories/taskRepository';
 import { taskPostSchema, taskPutSchema } from '../sharedTypes';
@@ -43,6 +44,18 @@ export const tasksRoute = new Hono()
         }
 
         return c.json(existingTask, 200);
+    })
+    .get('/:goalId{[0-9]+}/tasks', getUser, async (c) => {
+        const user = c.var.user;
+        const goalId = Number.parseInt(c.req.param('goalId'));
+
+        const error = await validateGoalId(goalId, user.id);
+        if (error) {
+            return c.json({ message: error.message }, error.status);
+        }
+
+        const tasks = await getTasks(goalId);
+        return c.json({ tasks }, 200);
     })
     .put(
         '/:goalId{[0-9]+}/tasks/:taskId{[0-9]+}',

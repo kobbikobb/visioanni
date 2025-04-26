@@ -3,9 +3,10 @@ import DeleteGoalButton from './DeleteGoalButton';
 import GoalCompletedCheckbox from './GoalCompletedCheckbox';
 import { Goal } from '@server/sharedTypes';
 import Card from '../content/Card';
+import GoalTasksList from './GoalTasksList';
 
 const GoalCard = ({ goal }: { goal: Goal }) => (
-    <Card key={goal.id} className="relative">
+    <Card className="relative">
         <div className="absolute transition-colorstop-4 right-4">
             <DeleteGoalButton id={goal.id} />
         </div>
@@ -17,6 +18,8 @@ const GoalCard = ({ goal }: { goal: Goal }) => (
         <p className="text-sm mt-1 text-gray-600 dark:text-gray-400">
             {new Date(goal.date).toLocaleDateString()}
         </p>
+
+        <GoalTasksList goalId={goal.id} />
 
         <div className="mt-2">
             <GoalCompletedCheckbox goal={goal} />

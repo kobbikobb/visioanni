@@ -1,3 +1,4 @@
+import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useUpdateGoal } from '@/hooks/useUpdateGoal';
 import { Goal } from '@server/sharedTypes';

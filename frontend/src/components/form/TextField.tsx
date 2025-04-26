@@ -1,16 +1,17 @@
+import React from 'react';
 import { useFieldContext } from './context';
 
 export const TextField = ({
     label,
     placeholder
 }: {
-    label: string;
+    label?: string;
     placeholder: string;
 }) => {
     const field = useFieldContext<string>();
     return (
         <label>
-            <div>{label}</div>
+            {label ?? <div>{label}</div>}
             <input
                 type="text"
                 placeholder={placeholder}
