@@ -1,3 +1,4 @@
+import React from 'react';
 import { useGoals } from '@/hooks/useGoals';
 import GoalCard from './GoalCard';
 
@@ -15,7 +16,7 @@ const GoalsList: React.FC = () => {
     return (
         <div className="mt-4 space-y-4">
             {goals.map((goal) => (
-                <GoalCard goal={goal} />
+                <GoalCard key={goal.id} goal={goal} />
             ))}
         </div>
     );
