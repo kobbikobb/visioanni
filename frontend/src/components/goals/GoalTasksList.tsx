@@ -25,10 +25,24 @@ const GoalTasksList = ({ goalId }: { goalId: number }) => {
 
     return (
         <div>
-            <div className="mt-4 space-y-4">
-                {tasks.map((task) => (
-                    <div key={task.id}>{task.title}</div>
-                ))}
+            <div className="space-y-2 mt-3">
+                <h4 className="text-sm font-medium">Tasks</h4>
+                {tasks.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">
+                        No tasks yet. Add a task to get started.
+                    </p>
+                ) : (
+                    <ul className="space-y-1 border border-gray-600 rounded-md p-1">
+                        {tasks.map((task) => (
+                            <li
+                                className="flex items-start gap-2 p-2 rounded-md"
+                                key={task.id}
+                            >
+                                {task.title}
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
             <form
                 onSubmit={(e) => {
@@ -40,7 +54,7 @@ const GoalTasksList = ({ goalId }: { goalId: number }) => {
                 <form.AppField
                     name="title"
                     children={(field) => (
-                        <field.TextField placeholder="Enter task title" />
+                        <field.TextField placeholder="Add task" />
                     )}
                 />
             </form>
