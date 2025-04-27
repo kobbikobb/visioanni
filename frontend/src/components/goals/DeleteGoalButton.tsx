@@ -1,3 +1,4 @@
+import React from 'react';
 import { Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useDeleteGoal } from '@/hooks/useDeleteGoal';
