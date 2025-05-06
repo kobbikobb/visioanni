@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppForm } from '../form';
 import { useCreateGoalTask } from '@/hooks/useCreateGoalTask';
 import { useGoalTasks } from '@/hooks/useGoalTasks';
+import DeleteTaskButton from './DeleteTaskButton';
 
 const GoalTasksList = ({ goalId }: { goalId: number }) => {
     const { tasks } = useGoalTasks({ goalId });
@@ -39,6 +40,10 @@ const GoalTasksList = ({ goalId }: { goalId: number }) => {
                                 key={task.id}
                             >
                                 {task.title}
+                                <DeleteTaskButton
+                                    goalId={goalId}
+                                    taskId={task.id}
+                                />
                             </li>
                         ))}
                     </ul>

@@ -1,9 +1,9 @@
+import React from 'react';
 import { useFieldContext } from './context';
 import DatePicker from './DatePicker';
 import { toDateString } from '../utils/dateUtils';
 
 export const DateField = ({ label }: { label: string }) => {
-    // NOTE: Dates are stored as strings
     const field = useFieldContext<string | undefined>();
     return (
         <label>
@@ -17,10 +17,6 @@ export const DateField = ({ label }: { label: string }) => {
                 }
                 className="mt-1"
             />
-            {/* <input */}
-            {/*     type="date" */}
-            {/*     className="w-full p-3 mb-3 rounded-md border" */}
-            {/* /> */}
             {field.state.meta.errors.length > 0 ? (
                 <em className="text-red-600">
                     {field.state.meta.errors.map((e) => e.message).join(', ')}
