@@ -73,7 +73,7 @@ export const tasksRoute = new Hono()
             }
 
             const taskUpdateJson = c.req.valid('json');
-            const taskUpdate = { ...taskUpdateJson, id: taskId };
+            const taskUpdate = { ...taskUpdateJson, id: taskId } as const;
             const updatedTask = await updateTask(taskUpdate);
 
             return c.json(updatedTask);

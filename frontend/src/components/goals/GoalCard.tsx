@@ -3,7 +3,7 @@ import DeleteGoalButton from './DeleteGoalButton';
 import GoalCompletedCheckbox from './GoalCompletedCheckbox';
 import { Goal } from '@server/sharedTypes';
 import Card from '../content/Card';
-import GoalTasksList from './GoalTasksList';
+import TaskList from './GoalTaskList';
 
 const GoalCard = ({ goal }: { goal: Goal }) => (
     <Card className="relative">
@@ -19,7 +19,7 @@ const GoalCard = ({ goal }: { goal: Goal }) => (
             {new Date(goal.date).toLocaleDateString()}
         </p>
 
-        <GoalTasksList goalId={goal.id} />
+        <TaskList goalId={goal.id} />
 
         <div className="mt-2">
             <GoalCompletedCheckbox goal={goal} />
