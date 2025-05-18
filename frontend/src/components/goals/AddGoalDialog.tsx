@@ -35,7 +35,6 @@ const AddGoalDialgo: React.FC = () => {
         onSubmit: async (values) => {
             const { title, date } = values.value;
             createGoal({ title, date });
-            // TODO: Reset form
         }
     });
 
