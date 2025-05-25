@@ -33,17 +33,19 @@ const GoalTasksList = ({ goalId }: { goalId: number }) => {
                         No tasks yet. Add a task to get started.
                     </p>
                 ) : (
-                    <ul className="space-y-1 border border-gray-600 rounded-md p-1">
+                    <ul className="space-y-1 border border-gray-600 rounded-md pl-3 pt-1 pb-1">
                         {tasks.map((task) => (
                             <li
-                                className="flex items-start gap-2 p-2 rounded-md"
+                                className="flex justify-between items-center"
                                 key={task.id}
                             >
                                 {task.title}
-                                <DeleteTaskButton
-                                    goalId={goalId}
-                                    taskId={task.id}
-                                />
+                                <div>
+                                    <DeleteTaskButton
+                                        goalId={goalId}
+                                        taskId={task.id}
+                                    />
+                                </div>
                             </li>
                         ))}
                     </ul>
